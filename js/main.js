@@ -473,8 +473,6 @@ require(['jquery'], function ($) {
 		if (!text) {
 			return;
 		}
-		searchHistory.add(text);
-		history.go(-1);
 		setTimeout(function () { // 异步执行 兼容QQ浏览器
 			if (settings.get('engines') === "via") {
 				window.via.searchText(text);

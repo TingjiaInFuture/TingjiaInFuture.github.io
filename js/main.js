@@ -50,7 +50,7 @@ require(['jquery'], function ($) {
 	};
 
 	var settingsFn = function (storage) {
-		this.storage = { engines: "quark", bookcolor: "black", searchHistory: true };
+		this.storage = { engines: "bing", bookcolor: "black", searchHistory: false };
 		this.storage = $.extend({}, this.storage, storage);
 	}
 	settingsFn.prototype = {

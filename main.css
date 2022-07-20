@@ -118,44 +118,7 @@ body,html {
 	border-radius: 16px;
 	margin-bottom: 24px;
 }
-.bookmark{
-	text-align: center;
-	display: flex;
-	flex-wrap: wrap;
-	margin: 0 -10%;
-	padding: 0 30px 180px;
-	transition: transform .4s,opacity .5s;
-	min-height: 90px;
-}
-.bookmark.animation {
-	opacity:0;
-	transform:translateY(80px);
-}
-.bookmark .list {
-	flex: 0 0 20%;
-	padding-top: 6px;
-	position: relative;
-}
-.bookmark .list .img {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	margin: 0 auto;
-	background-position:center;
-	background-size:cover;
-	background-repeat:no-repeat;
-	overflow: visible;
-	position: relative;
-}
-.bookmark .list .text {
-	font-size: 12px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	color: var(--dark);
-	text-shadow: 0 0 4px var(--white);
-	padding: 7px 0 10px;
-}
+
 .delbook{
 	top: -5px;
 	right: -5px;

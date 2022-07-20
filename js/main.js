@@ -407,34 +407,7 @@ require(['jquery'], function ($) {
 		$(".search-input").focus().val("").trigger("propertychange");
 	});
 
-	$(".shortcut1,.shortcut2").click(function (evt) {
-		$(".search-input").focus().val($(".search-input").val() + evt.target.innerText).trigger("propertychange");
-	});
-
-	$(".shortcut3").click(function (evt) {
-		if (evt.target.nodeName === "LI") {
-			var text = evt.target.innerText;
-			var data = {
-				百科: "https://baike.baidu.com/search?word=%s",
-				视频: "https://m.v.qq.com/search.html?act=0&keyWord=%s",
-				豆瓣: "https://m.douban.com/search/?query=%s",
-				新闻: "http://m.toutiao.com/search/?&keyword=%s",
-				图片: "https://m.baidu.com/sf/vsearch?pd=image_content&word=%s&tn=vsearch&atn=page",
-				微博: "https://m.weibo.cn/search?containerid=100103type=1&q=%s",
-				音乐: "http://m.music.migu.cn/v3/search?keyword=%s",
-				知乎: "https://www.zhihu.com/search?q=%s",
-				小说: "https://m.qidian.com/search?kw=%s",
-				旅游: "https://h5.m.taobao.com/trip/rx-search/list/index.html?&keyword=%s",
-				地图: "https://m.amap.com/search/mapview/keywords=%s",
-				电视剧: "http://m.iqiyi.com/search.html?key=%s",
-				股票: "https://emwap.eastmoney.com/info/search/index?t=14&k=%s",
-				汽车: "https://sou.m.autohome.com.cn/zonghe?q=%s"
-			}
-			if (data[text]) {
-				location.href = data[text].replace("%s", $(".search-input").val());
-			}
-		}
-	});
+	
 
 	$(".search-btn").click(function () {
 		var text = $(".search-input").val();
@@ -680,7 +653,7 @@ require(['jquery'], function ($) {
 			location.href = "x:bm?sort=default";
 		}
 	}).longPress(() => {
-		var data = [{ "title": "搜索引擎", "type": "select", "value": "engines", "data": [{ "t": "夸克搜索", "v": "quark" }, { "t": "跟随Via浏览器", "v": "via" }, { "t": "百度搜索", "v": "baidu" }, { "t": "谷歌搜索", "v": "google" }, { "t": "必应搜索", "v": "bing" }, { "t": "神马搜索", "v": "sm" }, { "t": "好搜搜索", "v": "haosou" }, { "t": "搜狗搜索", "v": "sogou" }, { "t": "自定义", "v": "diy" }] }, { "title": "设置壁纸", "value": "wallpaper" }, { "title": "设置LOGO", "value": "logo" }, { "title": "恢复默认壁纸和LOGO", "value": "delLogo" }, { "title": "图标颜色", "type": "select", "value": "bookcolor", "data": [{ "t": "深色图标", "v": "black" }, { "t": "浅色图标", "v": "white" }] }, { "title": "主页样式细圆", "type": "checkbox", "value": "styleThin" }, { "title": "夜间模式", "type": "checkbox", "value": "nightMode" }, { "title": "记录搜索历史", "type": "checkbox", "value": "searchHistory" }, { "type": "hr" }, { "title": "导出主页数据", "value": "export" }, { "title": "导入主页数据", "value": "import" }, { "type": "hr" }, { "title": "Github", "value": "openurl", "description": "https://github.com/liumingye/quarkHomePage" }, { "title": "关于", "description": "当前版本：" + app.version }];
+		var data = [{ "title": "搜索引擎", "type": "select", "value": "engines", "data": [{ "t": "夸克搜索", "v": "quark" }, { "t": "跟随Via浏览器", "v": "via" }, { "t": "百度搜索", "v": "baidu" }, { "t": "谷歌搜索", "v": "google" }, { "t": "必应搜索", "v": "bing" }, { "t": "神马搜索", "v": "sm" }, { "t": "好搜搜索", "v": "haosou" }, { "t": "搜狗搜索", "v": "sogou" }, { "t": "自定义", "v": "diy" }] }, { "title": "设置壁纸", "value": "wallpaper" }, { "title": "设置LOGO", "value": "logo" }, { "title": "恢复默认壁纸和LOGO", "value": "delLogo" }, { "title": "图标颜色", "type": "select", "value": "bookcolor", "data": [{ "t": "深色图标", "v": "black" }, { "t": "浅色图标", "v": "white" }] }, { "title": "主页样式细圆", "type": "checkbox", "value": "styleThin" }, { "title": "夜间模式", "type": "checkbox", "value": "nightMode" }, { "title": "记录搜索历史", "type": "checkbox", "value": "searchHistory" }, { "type": "hr" }, { "title": "导出主页数据", "value": "export" }, { "title": "导入主页数据", "value": "import" }, { "type": "hr" }, { "title": "源码", "value": "openurl", "description": "https://github.com/TingjiaInFuture/TingjiaInFuture.github.io" }, { "title": "关于", "description": "当前版本：" + app.version }];
 		var html = '<div class="page-settings"><div class="set-header"><div class="set-back"></div><p class="set-logo">主页设置</p></div><ul class="set-option-from">';
 		for (var json of data) {
 			if (json.type === 'hr') {

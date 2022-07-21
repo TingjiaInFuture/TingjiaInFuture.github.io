@@ -322,7 +322,6 @@ require(['jquery'], function ($) {
 				$(".shortcut1").show();
 				$(".shortcut2,.shortcut3,.empty-input").hide();
 				$(".search-input").val('');
-				$('.emptyHistory').removeClass('animation');
 				$('body').css("pointer-events", "");
 			});
 		}

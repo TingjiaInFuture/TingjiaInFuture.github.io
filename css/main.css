@@ -107,6 +107,7 @@ body,html {
 	background-position: center;
 	background-size: cover;
 	transition: opacity .3s;
+	transform:rotate(90deg);
 }
 .logo img {
 	width: 100%;

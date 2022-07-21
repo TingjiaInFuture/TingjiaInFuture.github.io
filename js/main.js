@@ -304,9 +304,7 @@ require(['jquery'], function ($) {
 				'border-color': ''
 			});
 			// 书签动画
-			$(".bookmark").removeClass("animation");
 			// 隐藏搜索页
-			$(".history").removeClass("animation");
 			$(".input-bg").css("border-color", "").removeClass("animation");
 			$(".shortcut").removeClass("animation");
 			$(".page-search").removeClass("animation");

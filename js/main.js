@@ -277,7 +277,6 @@ require(['jquery'], function ($) {
 				$('body').css("pointer-events", "");
 			}).addClass("animation");
 			$(".search-input").val("").focus();
-			$(".history").show().addClass("animation");
 			$(".input-bg").addClass("animation");
 			$(".shortcut").addClass("animation");
 		}, 1);

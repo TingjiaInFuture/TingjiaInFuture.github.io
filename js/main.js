@@ -407,14 +407,14 @@ require(['jquery'], function ($) {
 		var text = $(".search-input").val();
 		if ($(".search-btn").text() === "进入") {
 			!text.match(/^(ht|f)tp(s?):\/\//) && (text = "http://" + text);
-			
+			history.go(-1);
 			setTimeout(function () {
 				location.href = text;
 			}, 1);
 		} else {
 			if (!text) {
 				$(".search-input").blur();
-				
+				history.go(-1);
 			} else {
 				searchText(text);
 			}

@@ -1,0 +1,121 @@
+openapi: 3.0.1
+info:
+  title: Milin Server API
+  description: A database-backed API with the following endpoints
+  version: "v1"
+servers:
+  - url: https://server-tni-serverllication-jlocxabspm.cn-hangzhou.fcapp.run
+paths:
+  /:
+    get:
+      operationId: getRoot
+      summary: 获取API信息
+      responses:
+        "200":
+          description: API信息获取成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiInfo"
+  /messages:
+    get:
+      operationId: getMessages
+      summary: 获取聊天信息
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 聊天信息获取成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatData"
+        "400":
+          description: 数据库连接错误
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorData"
+  /message:
+    post:
+      operationId: addMessage
+      summary: 添加新的聊天信息
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewMessage"
+      responses:
+        "201":
+          description: 聊天信息添加成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessData"
+        "400":
+          description: 聊天信息添加失败
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorData"
+components:
+  schemas:
+    ApiInfo:
+      type: object
+      required: [title, intro, routes]
+      properties:
+        title:
+          type: string
+          description: API标题
+        intro:
+          type: string
+          description: API简介
+        routes:
+          type: array
+          items:
+            type: string
+          description: API端点列表
+    ChatData:
+      type: object
+      required: [chat]
+      properties:
+        chat:
+          type: array
+          items:
+            type: string
+          description: 聊天信息列表
+    NewMessage:
+      type: object
+      required: [message, senderUsername, receiverUsername]
+      properties:
+        message:
+          type: string
+          description: 新的聊天信息
+        senderUsername:
+          type: string
+          description: 发送者用户名
+        receiverUsername:
+          type: string
+          description: 接收者用户名
+    SuccessData:
+      type: object
+      required: [success, username]
+      properties:
+        success:
+          type: boolean
+          description: 操作是否成功
+        username:
+          type: string
+          description: 发送者用户名
+    ErrorData:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+          description: 错误信息

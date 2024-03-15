@@ -1,17 +1,17 @@
 version: 0.0.1
 examples:
-    - context: # 对话历史
-          - role: user
-            content: 扔一个漂流瓶，内容是：希望世界和平
-          - role: bot
-              # 触发插件
-            plugin:
-                # 应当触发的接口operationId
-                operationId: addBottle
-                # 思考过程，对触发有帮助
-                thoughts: 这是一个扔漂流瓶的需求
-                requestArguments:
-                    message: "希望世界和平"
+    # - context: # 对话历史
+    #       - role: user
+    #         content: 扔一个漂流瓶，内容是：希望世界和平
+    #       - role: bot
+    #           # 触发插件
+    #         plugin:
+    #             # 应当触发的接口operationId
+    #             operationId: addBottle
+    #             # 思考过程，对触发有帮助
+    #             thoughts: 这是一个扔漂流瓶的需求
+    #             requestArguments:
+    #                 message: "希望世界和平"
     - context: # 对话历史
           - role: user
             content: 捞一个漂流瓶

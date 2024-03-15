@@ -1,34 +1,34 @@
 openapi: 3.0.1
 info:
-  title: Drift Bottle Server API
+  title: Server API
   description: A database-backed API with the following endpoints
   version: "v1"
 servers:
   - url: https://server-tni-serverllication-jlocxabspm.cn-hangzhou.fcapp.run
 paths:
   /bottle:
-    post:
-      operationId: addBottle
-      summary: 添加漂流瓶
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/NewBottle"
-      responses:
-        "201":
-          description: 漂流瓶添加成功
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SuccessData"
-        "400":
-          description: 漂流瓶添加失败
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorData"
+    # post:
+    #   operationId: addBottle
+    #   summary: 添加漂流瓶
+    #   requestBody:
+    #     required: true
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: "#/components/schemas/NewBottle"
+    #   responses:
+    #     "201":
+    #       description: 漂流瓶添加成功
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: "#/components/schemas/SuccessData"
+    #     "400":
+    #       description: 漂流瓶添加失败
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: "#/components/schemas/ErrorData"
     get:
       operationId: getBottle
       summary: 获取漂流瓶

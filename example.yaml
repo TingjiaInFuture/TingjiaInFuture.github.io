@@ -1,0 +1,36 @@
+version: 0.0.1
+examples:
+    - context: # 对话历史
+          - role: user
+            content: 请帮我保存对话："张庭嘉对网络用户A说你好"
+          - role: bot
+              # 触发插件
+            plugin:
+                # 应当触发的接口operationId
+                operationId: addMessage
+                # 思考过程，对触发有帮助
+                thoughts: 这是一个保存对话的需求
+                requestArguments:
+                    message: "你好",
+                    senderUsername: "张庭嘉",
+                    receiverUsername: "网络用户A"
+    - context: # 对话历史
+          - role: user
+            content: 我要查看张庭嘉的对话记录
+          - role: bot
+              # 触发插件
+            plugin:
+                # 应当触发的接口operationId
+                operationId: getMessages
+                # 思考过程，对触发有帮助
+                thoughts: 这是一个查看对话记录的需求
+                requestArguments:
+                    username: "张庭嘉"
+    # 反例，无需触发此插件的任一某个接口
+    - context: # 对话历史
+          - role: user
+            content: 怎么提高对话技巧?
+          - role: bot
+              # 无需触发
+            plugin:
+                thoughts: 我不需要使用以上工具

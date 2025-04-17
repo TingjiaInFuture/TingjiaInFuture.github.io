@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>德州扑克</title>
+    <link rel="stylesheet" href="poker.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-container">
+            <div class="start-screen">
+                <h1>德州扑克</h1>
+                <p>单机版</p>
+                <button class="start-button">开始游戏</button>
+                <a href="../index.html" class="menu-button">返回菜单</a>
+            </div>
+            
+            <div class="game-area">
+                <div class="dealer-info">
+                    <div class="dealer-label">庄家</div>
+                    <div class="pot">底池: $<span class="pot-amount">0</span></div>
+                </div>
+                
+                <div class="community-cards">
+                    <div class="card-placeholder" id="community-1"></div>
+                    <div class="card-placeholder" id="community-2"></div>
+                    <div class="card-placeholder" id="community-3"></div>
+                    <div class="card-placeholder" id="community-4"></div>
+                    <div class="card-placeholder" id="community-5"></div>
+                </div>
+                
+                <div class="opponents">
+                    <div class="opponent" id="opponent-1">
+                        <div class="player-info">
+                            <div class="player-name">电脑 1</div>
+                            <div class="player-chips">$1000</div>
+                        </div>
+                        <div class="player-cards">
+                            <div class="card card-back"></div>
+                            <div class="card card-back"></div>
+                        </div>
+                        <div class="player-bet">$0</div>
+                    </div>
+                    
+                    <div class="opponent" id="opponent-2">
+                        <div class="player-info">
+                            <div class="player-name">电脑 2</div>
+                            <div class="player-chips">$1000</div>
+                        </div>
+                        <div class="player-cards">
+                            <div class="card card-back"></div>
+                            <div class="card card-back"></div>
+                        </div>
+                        <div class="player-bet">$0</div>
+                    </div>
+                    
+                    <div class="opponent" id="opponent-3">
+                        <div class="player-info">
+                            <div class="player-name">电脑 3</div>
+                            <div class="player-chips">$1000</div>
+                        </div>
+                        <div class="player-cards">
+                            <div class="card card-back"></div>
+                            <div class="card card-back"></div>
+                        </div>
+                        <div class="player-bet">$0</div>
+                    </div>
+                </div>
+                
+                <div class="player">
+                    <div class="player-cards">
+                        <div class="card-placeholder" id="player-card-1"></div>
+                        <div class="card-placeholder" id="player-card-2"></div>
+                    </div>
+                    <div class="player-info">
+                        <div class="player-name">玩家</div>
+                        <div class="player-chips">$<span class="player-chips-amount">1000</span></div>
+                    </div>
+                    <div class="player-bet">$0</div>
+                </div>
+                
+                <div class="controls">
+                    <div class="action-buttons">
+                        <button id="fold-button" class="action-button">弃牌</button>
+                        <button id="call-button" class="action-button">跟注</button>
+                        <button id="raise-button" class="action-button">加注</button>
+                        <div class="bet-slider-container">
+                            <input type="range" min="0" max="1000" value="0" class="bet-slider">
+                            <span class="bet-amount">$0</span>
+                        </div>
+                    </div>
+                    <div class="game-message">轮到你行动了</div>
+                </div>
+            </div>
+            
+            <div class="result-screen">
+                <h2>游戏结束</h2>
+                <div class="result-message"></div>
+                <button class="restart-button">再玩一局</button>
+                <a href="../index.html" class="menu-button">返回菜单</a>
+            </div>
+        </div>
+    </div>
+    <script src="poker.js"></script>
+</body>
+</html>

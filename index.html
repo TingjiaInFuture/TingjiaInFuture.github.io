@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线游戏中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.8;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .game-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .flappy-bird-image {
+            background-color: #70c5ce;
+        }
+        
+        .flappy-bird-image::before {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .flappy-bird-image::after {
+            content: "";
+            position: absolute;
+            right: 30%;
+            height: 200px;
+            width: 50px;
+            background-color: #3CB371;
+            box-shadow: -80px 0 0 #3CB371, 80px 0 0 #3CB371;
+        }
+        
+        .poker-image {
+            background-color: #277a32;
+        }
+        
+        .poker-image::before {
+            content: "♠ ♥";
+            font-size: 64px;
+            color: white;
+        }
+        
+        .poker-image::after {
+            content: "♦ ♣";
+            font-size: 64px;
+            color: white;
+            position: absolute;
+            top: 60%;
+        }
+
+        .snake-image {
+            background-color: #90EE90; /* Light green background */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .snake-image::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background-color: #FF4500; /* OrangeRed for food */
+            border-radius: 50%;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .snake-image::after {
+            content: "";
+            width: 80px;
+            height: 20px;
+            background-color: #4CAF50; /* Green for snake */
+            border-radius: 10px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .firewater-image {
+            background: linear-gradient(to right, #ff6b6b, #4ecdc4); /* Red to Blue gradient */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .firewater-image::before {
+            content: "🔥"; /* Fire emoji */
+            font-size: 64px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .firewater-image::after {
+            content: "💧"; /* Water droplet emoji */
+            font-size: 64px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .game-info {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .game-info h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .game-info p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .play-button {
+            display: inline-block;
+            padding: 10px 30px;
+            background-color: #f1c40f;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 5px 0 #e67e22;
+            transition: all 0.1s;
+        }
+        
+        .play-button:hover {
+            background-color: #f39c12;
+        }
+        
+        .play-button:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #e67e22;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .game-card {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>在线游戏中心</h1>
+            <p>选择您想玩的游戏</p>
+        </div>
+        
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-image flappy-bird-image"></div>
+                <div class="game-info">
+                    <h2>Flappy Bird</h2>
+                    <p>控制小鸟飞行，穿过管道之间的缝隙，获得高分！经典的休闲游戏体验。</p>
+                    <a href="flappybird/index.html" class="play-button">开始游戏</a>
+                </div>
+            </div>
+            
+            <div class="game-card">
+                <div class="game-image poker-image"></div>
+                <div class="game-info">
+                    <h2>德州扑克</h2>
+                    <p>体验经典的德州扑克游戏，与电脑AI对战，展示您的策略和运气！</p>
+                    <a href="poker/index.html" class="play-button">开始游戏</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <div class="game-image snake-image"></div>
+                <div class="game-info">
+                    <h2>贪吃蛇</h2>
+                    <p>控制小蛇吃食物，变得越来越长！经典怀旧游戏，挑战你的反应速度。</p>
+                    <a href="snake/index.html" class="play-button">开始游戏</a>
+                </div>
+            </div>
+
+            <!-- 新增森林冰火人游戏卡片 -->
+            <div class="game-card">
+                <div class="game-image firewater-image"></div>
+                <div class="game-info">
+                    <h2>森林冰火人</h2>
+                    <p>控制火娃和水娃，协作闯关，收集宝石，到达终点。经典的双人合作平台游戏。</p>
+                    <a href="firewater/index.html" class="play-button">开始游戏</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 在线游戏中心 | 版权所有</p>
+        </div>
+    </div>
+</body>
+</html>

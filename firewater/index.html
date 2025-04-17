@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>森林冰火人</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div id="start-screen" class="screen">
+            <h1>森林冰火人</h1>
+            <p>合作游戏 - 一起到达终点</p>
+            <div class="instructions">
+                <div class="character-controls">
+                    <div class="character fire">
+                        <div class="avatar"></div>
+                        <p>火娃</p>
+                        <p>方向键控制</p>
+                        <p>不能碰水</p>
+                    </div>
+                    <div class="character water">
+                        <div class="avatar"></div>
+                        <p>水娃</p>
+                        <p>WASD键控制</p>
+                        <p>不能碰火</p>
+                    </div>
+                </div>
+                <p class="tip">提示：收集所有宝石并到达各自的门</p>
+            </div>
+            <button id="start-button">开始游戏</button>
+            <button id="level-select-button">选择关卡</button>
+            <a href="../index.html" class="menu-button">返回主菜单</a>
+        </div>
+
+        <div id="level-select-screen" class="screen">
+            <h2>选择关卡</h2>
+            <div class="level-grid" id="level-grid">
+                <!-- 关卡按钮将通过JS动态添加 -->
+            </div>
+            <button id="back-button">返回</button>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div class="hud">
+                <div class="level-info">关卡: <span id="level-number">1</span></div>
+                <div class="gem-counter">
+                    <span id="gems-collected">0</span>/<span id="total-gems">0</span> 宝石
+                </div>
+                <button id="pause-button">暂停</button>
+            </div>
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            <div class="touch-controls">
+                <div class="fire-controls">
+                    <button class="btn fire-left">←</button>
+                    <button class="btn fire-jump">↑</button>
+                    <button class="btn fire-right">→</button>
+                </div>
+                <div class="water-controls">
+                    <button class="btn water-left">A</button>
+                    <button class="btn water-jump">W</button>
+                    <button class="btn water-right">D</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="pause-screen" class="screen">
+            <h2>游戏暂停</h2>
+            <button id="resume-button">继续游戏</button>
+            <button id="restart-level-button">重新开始</button>
+            <button id="exit-to-menu-button">返回主菜单</button>
+        </div>
+
+        <div id="level-complete-screen" class="screen">
+            <h2>关卡完成!</h2>
+            <div class="level-stats">
+                <p>收集的宝石: <span id="level-gems-collected">0</span>/<span id="level-total-gems">0</span></p>
+            </div>
+            <button id="next-level-button">下一关</button>
+            <button id="replay-level-button">重玩本关</button>
+            <button id="menu-button">主菜单</button>
+        </div>
+
+        <div id="game-over-screen" class="screen">
+            <h2>游戏结束</h2>
+            <p id="game-over-message">两位玩家都必须活着才能完成关卡!</p>
+            <button id="retry-button">重试</button>
+            <button id="game-over-menu-button">主菜单</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

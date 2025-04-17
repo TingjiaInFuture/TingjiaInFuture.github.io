@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>贪吃蛇</h1>
+        <div class="score-container">
+            得分: <span id="score">0</span>
+        </div>
+        <canvas id="game-canvas" width="400" height="400"></canvas>
+        <div id="game-over" class="game-message" style="display: none;">
+            <h2>游戏结束!</h2>
+            <p>你的得分: <span id="final-score">0</span></p>
+            <button id="restart-button">重新开始</button>
+        </div>
+         <div id="start-screen" class="game-message">
+            <h2>贪吃蛇</h2>
+            <p>使用方向键或 WASD 控制方向</p>
+            <button id="start-button">开始游戏</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

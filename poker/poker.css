@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    background-color: #277a32;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    min-height: 600px;
+}
+
+/* 开始屏幕 */
+.start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    text-align: center;
+}
+
+.start-screen h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.start-button, .restart-button, .menu-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 5px 0 #c0392b;
+    transition: all 0.1s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.menu-button {
+    background-color: #3498db;
+    box-shadow: 0 5px 0 #2980b9;
+    margin-top: 10px;
+}
+
+.start-button:hover, .restart-button:hover {
+    background-color: #c0392b;
+}
+
+.menu-button:hover {
+    background-color: #2980b9;
+}
+
+.start-button:active, .restart-button:active, .menu-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #c0392b;
+}
+
+.menu-button:active {
+    box-shadow: 0 2px 0 #2980b9;
+}
+
+/* 游戏区域 */
+.game-area {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* 庄家信息 */
+.dealer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.pot {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* 公共牌区 */
+.community-cards {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.card-placeholder {
+    width: 80px;
+    height: 120px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+/* 牌样式 */
+.card {
+    width: 80px;
+    height: 120px;
+    border-radius: 5px;
+    background-color: white;
+    position: relative;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.card-back {
+    background: linear-gradient(135deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
+    background-size: 10px 10px;
+}
+
+.hearts, .diamonds {
+    color: #e74c3c;
+}
+
+.spades, .clubs {
+    color: #2c3e50;
+}
+
+/* 对手区域 */
+.opponents {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.opponent {
+    text-align: center;
+    color: white;
+    margin: 10px;
+}
+
+.player-info {
+    margin-bottom: 10px;
+}
+
+.player-name {
+    font-weight: bold;
+}
+
+.player-cards {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.player-bet {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+/* 玩家区域 */
+.player {
+    margin-top: auto;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+/* 游戏控制区 */
+.controls {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.action-button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.action-button:hover {
+    background-color: #2980b9;
+}
+
+.bet-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.bet-slider {
+    width: 200px;
+}
+
+.bet-amount {
+    width: 60px;
+    text-align: left;
+}
+
+.game-message {
+    margin-top: 10px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 结果屏幕 */
+.result-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    text-align: center;
+}
+
+.result-screen h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.result-message {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 10px;
+    }
+    
+    .card {
+        width: 60px;
+        height: 90px;
+        font-size: 18px;
+    }
+    
+    .card-placeholder {
+        width: 60px;
+        height: 90px;
+    }
+}

@@ -164,6 +164,20 @@
             font-size: 64px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
+
+        /* 新增拳皇游戏卡片图片样式 */
+        .kingoffighters-image {
+            background-color: #d32f2f; /* Red background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .kingoffighters-image::before {
+            content: "🥊"; /* Boxing glove emoji */
+            font-size: 64px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
         
         .game-info {
             padding: 20px;
@@ -257,13 +271,22 @@
                 </div>
             </div>
 
-            <!-- 新增森林冰火人游戏卡片 -->
             <div class="game-card">
                 <div class="game-image firewater-image"></div>
                 <div class="game-info">
                     <h2>森林冰火人</h2>
                     <p>控制火娃和水娃，协作闯关，收集宝石，到达终点。经典的双人合作平台游戏。</p>
                     <a href="firewater/index.html" class="play-button">开始游戏</a>
+                </div>
+            </div>
+
+            <!-- 新增拳皇游戏卡片 -->
+            <div class="game-card">
+                <div class="game-image kingoffighters-image"></div>
+                <div class="game-info">
+                    <h2>拳皇</h2>
+                    <p>选择你最喜欢的格斗家，进行激烈的对战！经典的街机格斗游戏。</p>
+                    <a href="kingoffighters/index.html" class="play-button">开始游戏</a>
                 </div>
             </div>
         </div>

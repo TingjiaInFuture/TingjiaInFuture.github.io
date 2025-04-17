@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拳皇 - 基础版</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="hud">
+            <!-- Player 1 Health -->
+            <div class="player-health player1">
+                <div class="health-bar-outer">
+                    <div id="player1-health" class="health-bar-inner"></div>
+                </div>
+                <div class="player-name">玩家 1</div>
+            </div>
+
+            <!-- Timer -->
+            <div id="timer" class="timer">60</div>
+
+            <!-- Player 2 Health -->
+            <div class="player-health player2">
+                 <div class="health-bar-outer">
+                    <div id="player2-health" class="health-bar-inner"></div>
+                </div>
+                 <div class="player-name">玩家 2</div>
+            </div>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div id="message-overlay" class="message-overlay" style="display: flex;">
+            <div id="message-content">
+                <h1>拳皇 - 基础版</h1>
+                <p>玩家 1: WASD 移动, 空格 攻击</p>
+                <p>玩家 2: 方向键 移动, Enter 攻击</p>
+                <button id="start-button">开始游戏</button>
+                 <a href="../index.html" class="menu-button">返回菜单</a>
+            </div>
+        </div>
+         <div id="game-over-overlay" class="message-overlay" style="display: none;">
+            <div id="game-over-content">
+                <h1 id="winner-message">游戏结束</h1>
+                <button id="restart-button">重新开始</button>
+                 <a href="../index.html" class="menu-button">返回菜单</a>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

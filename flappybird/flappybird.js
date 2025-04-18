@@ -24,7 +24,7 @@ highScoreDisplay.textContent = highScore;
 // 游戏变量
 let game = {
     isRunning: false,
-    speed: 2,
+    speed: 2, // Default speed
     gravity: 0.5,
     score: 0,
     frames: 0
@@ -33,7 +33,7 @@ let game = {
 // 鸟对象
 const bird = {
     x: 50,
-    y: canvas.height / 2,
+    y: canvas.height / 3, // <-- Changed initial height
     width: 34,
     height: 24,
     velocity: 0,
@@ -100,7 +100,7 @@ const bird = {
     
     // 重置鸟
     reset: function() {
-        this.y = canvas.height / 2;
+        this.y = canvas.height / 3; // <-- Changed reset height
         this.velocity = 0;
     }
 };
@@ -190,7 +190,10 @@ const background = {
 };
 
 // 开始游戏
-function startGame() {
+function startGame(selectedSpeed) {
+    // Set game speed based on selection
+    game.speed = selectedSpeed || 2; // Default to medium if not provided
+
     startScreen.style.display = 'none';
     gameOverScreen.style.display = 'none';
     game.isRunning = true;
@@ -217,9 +220,9 @@ function gameOver() {
 }
 
 // 重新开始游戏
-function restartGame() {
+function restartGame(speedToUse) {
     gameOverScreen.style.display = 'none';
-    startGame();
+    startGame(speedToUse); // Pass the speed to use
 }
 
 // 游戏主循环
@@ -261,8 +264,9 @@ function gameLoop() {
 // 事件监听
 document.addEventListener('keydown', function(e) {
     if (e.code === 'Space') {
-        if (!game.isRunning && gameOverScreen.style.display !== 'flex') {
-            startGame();
+        if (!game.isRunning && gameOverScreen.style.display !== 'flex' && startScreen.style.display !== 'none') {
+            // Don't start game here, let speed buttons handle it
+            // startGame(); // Removed this line
         } else if (game.isRunning) {
             bird.jump();
         }
@@ -272,8 +276,9 @@ document.addEventListener('keydown', function(e) {
 canvas.addEventListener('click', function() {
     if (game.isRunning) {
         bird.jump();
-    } else if (gameOverScreen.style.display !== 'flex') {
-        startGame();
+    } else if (gameOverScreen.style.display !== 'flex' && startScreen.style.display !== 'none') {
+         // Don't start game here, let speed buttons handle it
+         // startGame(); // Removed this line
     }
 });
 
@@ -282,13 +287,24 @@ document.addEventListener('touchstart', function(e) {
     e.preventDefault();
     if (game.isRunning) {
         bird.jump();
-    } else if (gameOverScreen.style.display !== 'flex') {
-        startGame();
+    } else if (gameOverScreen.style.display !== 'flex' && startScreen.style.display !== 'none') {
+         // Don't start game here, let speed buttons handle it
+         // startGame(); // Removed this line
     }
 });
 
-startScreen.addEventListener('click', startGame);
-restartButton.addEventListener('click', restartGame);
+// Event Listeners for speed selection buttons (will be added to HTML)
+document.getElementById('speed-slow').addEventListener('click', () => startGame(1.5));
+document.getElementById('speed-medium').addEventListener('click', () => startGame(2));
+document.getElementById('speed-fast').addEventListener('click', () => startGame(3));
+
+// Remove the generic startScreen click listener as buttons now handle start
+// startScreen.addEventListener('click', startGame); // Removed this line
+
+restartButton.addEventListener('click', () => {
+    // Restart with the current speed setting
+    restartGame(game.speed);
+});
 
 // 初始化
 background.draw();

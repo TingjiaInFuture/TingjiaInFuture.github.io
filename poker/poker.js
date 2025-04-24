@@ -597,6 +597,8 @@ raiseButton.addEventListener('click', playerRaise);
 // 更新加注滑块显示
 betSlider.addEventListener('input', () => {
     betAmount.textContent = '$' + betSlider.value;
+    // 动态更新加注按钮文字
+    raiseButton.textContent = `加注到 $${betSlider.value}`;
 });
 
 // 初始禁用玩家控制

@@ -80,6 +80,24 @@ class Sprite {
         ctx.strokeStyle = 'rgba(0,0,0,0.6)';
         ctx.lineWidth = 1.5;
         ctx.stroke();
+        // 绘制手臂
+        ctx.fillStyle = this.color;
+        const armHeight = this.height * 0.4;
+        const armY = this.position.y + this.height * 0.3;
+        // 左臂
+        ctx.fillRect(this.position.x - 10, armY, 10, armHeight);
+        // 右臂
+        ctx.fillRect(this.position.x + this.width, armY, 10, armHeight);
+        // 绘制手部
+        const handRadius = 8;
+        // 左手
+        ctx.beginPath();
+        ctx.arc(this.position.x - 10, armY + armHeight, handRadius, 0, Math.PI * 2);
+        ctx.fill();
+        // 右手
+        ctx.beginPath();
+        ctx.arc(this.position.x + this.width + 10, armY + armHeight, handRadius, 0, Math.PI * 2);
+        ctx.fill();
         ctx.restore();
     }
 

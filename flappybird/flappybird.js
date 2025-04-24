@@ -19,6 +19,9 @@ let highScore = localStorage.getItem('flappyHighScore') ? parseInt(localStorage.
     sound.addEventListener('error', () => console.error(sound.src + ' 加载失败，请检查文件是否存在于 flappybird 目录')); 
 });
 
+// 静音状态读取
+let isMuted = localStorage.getItem('flappyMuted') === 'true';
+
 // 背景音乐
 const backgroundMusic = new Audio('bg.mp3');
 backgroundMusic.loop = true;
@@ -47,7 +50,6 @@ let game = {
 let animationId;
 
 // 静音状态读取
-let isMuted = localStorage.getItem('flappyMuted') === 'true';
 [soundJump, soundScore, soundHit].forEach(s => s.muted = isMuted);
 
 // 鸟对象
@@ -321,8 +323,8 @@ function gameLoop() {
 document.addEventListener('keydown', function(e) {
     if (e.code === 'Space') {
         if (!game.isRunning && gameOverScreen.style.display !== 'flex' && startScreen.style.display !== 'none') {
-            // Don't start game here, let speed buttons handle it
-            // startGame(); // Removed this line
+            // 开始游戏（默认速度）
+            startGame(game.speed);
         } else if (game.isRunning) {
             bird.jump();
         }
@@ -333,8 +335,8 @@ canvas.addEventListener('click', function() {
     if (game.isRunning) {
         bird.jump();
     } else if (gameOverScreen.style.display !== 'flex' && startScreen.style.display !== 'none') {
-         // Don't start game here, let speed buttons handle it
-         // startGame(); // Removed this line
+        // 点击屏幕开始游戏（默认速度）
+        startGame(game.speed);
     }
 });
 
@@ -344,8 +346,8 @@ document.addEventListener('touchstart', function(e) {
     if (game.isRunning) {
         bird.jump();
     } else if (gameOverScreen.style.display !== 'flex' && startScreen.style.display !== 'none') {
-         // Don't start game here, let speed buttons handle it
-         // startGame(); // Removed this line
+        // 触控开始游戏（默认速度）
+        startGame(game.speed);
     }
 });
 

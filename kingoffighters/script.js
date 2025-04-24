@@ -49,19 +49,38 @@ class Sprite {
     }
 
     draw() {
-        ctx.fillStyle = this.color;
+        ctx.save();
+        // 阴影与投影
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = 'rgba(0,0,0,0.5)';
+        // 身体线性渐变
+        const bodyGrad = ctx.createLinearGradient(
+            this.position.x, this.position.y,
+            this.position.x, this.position.y + this.height
+        );
+        bodyGrad.addColorStop(0, '#ffffff');
+        bodyGrad.addColorStop(1, this.color);
+        ctx.fillStyle = bodyGrad;
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-
-        // Draw attack box only when attacking (for debugging)
-        // if (this.isAttacking) {
-        //     ctx.fillStyle = 'rgba(0, 255, 0, 0.5)'; // Green transparent
-        //     ctx.fillRect(
-        //         this.attackBox.position.x,
-        //         this.attackBox.position.y,
-        //         this.attackBox.width,
-        //         this.attackBox.height
-        //     );
-        // }
+        // 描边增强立体感
+        ctx.strokeStyle = 'rgba(0,0,0,0.7)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
+        // 头部径向渐变
+        const headX = this.position.x + this.width/2;
+        const headY = this.position.y - this.width/3;
+        const headR = this.width/3;
+        const headGrad = ctx.createRadialGradient(headX, headY, headR/3, headX, headY, headR);
+        headGrad.addColorStop(0, '#f5f5f5');
+        headGrad.addColorStop(1, this.color);
+        ctx.fillStyle = headGrad;
+        ctx.beginPath();
+        ctx.arc(headX, headY, headR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.restore();
     }
 
     update() {

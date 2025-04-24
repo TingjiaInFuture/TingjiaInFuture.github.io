@@ -426,69 +426,58 @@ class Player {
     }
     
     draw() {
-        if (this.isDead) return;
-        
+        // ...existing code before drawing body...
         ctx.save();
-        
-        // 玩家身体
+        // 阴影设置
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = this.type === 'fire' ? 'rgba(255,100,0,0.6)' : 'rgba(0,150,255,0.6)';
+        // 身体径向渐变
+        const grad = ctx.createRadialGradient(
+            this.x + this.width/2, this.y + this.height/2, this.width/4,
+            this.x + this.width/2, this.y + this.height/2, this.width
+        );
         if (this.type === 'fire') {
-            // 火娃 - 红色渐变
-            const gradient = ctx.createRadialGradient(
-                this.x + this.width/2, this.y + this.height/2, 5,
-                this.x + this.width/2, this.y + this.height/2, 25
-            );
-            gradient.addColorStop(0, '#ffcc00');
-            gradient.addColorStop(1, '#ff4d4d');
-            ctx.fillStyle = gradient;
+            grad.addColorStop(0, '#ff6a00');
+            grad.addColorStop(1, '#ff1e00');
         } else {
-            // 水娃 - 蓝色渐变
-            const gradient = ctx.createRadialGradient(
-                this.x + this.width/2, this.y + this.height/2, 5,
-                this.x + this.width/2, this.y + this.height/2, 25
-            );
-            gradient.addColorStop(0, '#99ccff');
-            gradient.addColorStop(1, '#3366ff');
-            ctx.fillStyle = gradient;
+            grad.addColorStop(0, '#66ccff');
+            grad.addColorStop(1, '#0066cc');
         }
-        
-        // 绘制身体 (圆角矩形)
-        const radius = 10;
+        ctx.fillStyle = grad;
+        // 圆角矩形身体
+        const r = 12;
         ctx.beginPath();
-        ctx.moveTo(this.x + radius, this.y);
-        ctx.lineTo(this.x + this.width - radius, this.y);
-        ctx.quadraticCurveTo(this.x + this.width, this.y, this.x + this.width, this.y + radius);
-        ctx.lineTo(this.x + this.width, this.y + this.height - radius);
-        ctx.quadraticCurveTo(this.x + this.width, this.y + this.height, this.x + this.width - radius, this.y + this.height);
-        ctx.lineTo(this.x + radius, this.y + this.height);
-        ctx.quadraticCurveTo(this.x, this.y + this.height, this.x, this.y + this.height - radius);
-        ctx.lineTo(this.x, this.y + radius);
-        ctx.quadraticCurveTo(this.x, this.y, this.x + radius, this.y);
+        ctx.moveTo(this.x + r, this.y);
+        ctx.lineTo(this.x + this.width - r, this.y);
+        ctx.quadraticCurveTo(this.x + this.width, this.y, this.x + this.width, this.y + r);
+        ctx.lineTo(this.x + this.width, this.y + this.height - r);
+        ctx.quadraticCurveTo(this.x + this.width, this.y + this.height, this.x + this.width - r, this.y + this.height);
+        ctx.lineTo(this.x + r, this.y + this.height);
+        ctx.quadraticCurveTo(this.x, this.y + this.height, this.x, this.y + this.height - r);
+        ctx.lineTo(this.x, this.y + r);
+        ctx.quadraticCurveTo(this.x, this.y, this.x + r, this.y);
         ctx.closePath();
         ctx.fill();
-        
-        // 绘制眼睛
+        // 描边提升立体感
+        ctx.strokeStyle = this.type === 'fire' ? 'rgba(255,255,200,0.6)' : 'rgba(200,255,255,0.6)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        // 眼睛高光
         ctx.fillStyle = 'white';
+        const eyeY = this.y + this.height * 0.3;
+        const eyeX1 = this.x + this.width * 0.3;
+        const eyeX2 = this.x + this.width * 0.7;
         ctx.beginPath();
-        ctx.arc(this.x + this.width/2 + 5, this.y + 12, 5, 0, Math.PI * 2);
+        ctx.arc(eyeX1, eyeY, 4, 0, Math.PI * 2);
+        ctx.arc(eyeX2, eyeY, 4, 0, Math.PI * 2);
         ctx.fill();
-        
         ctx.fillStyle = 'black';
         ctx.beginPath();
-        ctx.arc(this.x + this.width/2 + 5, this.y + 12, 2, 0, Math.PI * 2);
+        ctx.arc(eyeX1, eyeY, 2, 0, Math.PI * 2);
+        ctx.arc(eyeX2, eyeY, 2, 0, Math.PI * 2);
         ctx.fill();
-        
-        // 如果到达门，添加一个光环效果
-        if (this.reachedDoor) {
-            ctx.globalAlpha = 0.5 + Math.sin(Date.now() / 200) * 0.3;
-            ctx.strokeStyle = this.type === 'fire' ? '#ff8c00' : '#00bfff';
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.arc(this.x + this.width/2, this.y + this.height/2, this.width * 0.8, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.globalAlpha = 1;
-        }
-        
         ctx.restore();
+        // ...existing code after drawing body...
     }
 }
 

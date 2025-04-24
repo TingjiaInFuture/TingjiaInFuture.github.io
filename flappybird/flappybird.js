@@ -13,6 +13,20 @@ const soundScore = new Audio('score.wav');
 const soundHit = new Audio('hit.wav');
 let highScore = localStorage.getItem('flappyHighScore') ? parseInt(localStorage.getItem('flappyHighScore')) : 0;
 
+// 确保音效文件已加载或报告错误
+[soundJump, soundScore, soundHit].forEach(sound => {
+    sound.addEventListener('canplaythrough', () => console.log(sound.src + ' 加载成功'));
+    sound.addEventListener('error', () => console.error(sound.src + ' 加载失败，请检查文件是否存在于 flappybird 目录')); 
+});
+
+// 背景音乐
+const backgroundMusic = new Audio('bg.mp3');
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.5;
+backgroundMusic.muted = isMuted;
+backgroundMusic.addEventListener('canplaythrough', () => console.log('背景音乐加载成功'));
+backgroundMusic.addEventListener('error', () => console.error('背景音乐加载失败，请检查 bg.mp3 文件'));
+
 // 设置Canvas尺寸
 canvas.width = 320;
 canvas.height = 480;
@@ -27,8 +41,14 @@ let game = {
     speed: 2, // Default speed
     gravity: 0.5,
     score: 0,
-    frames: 0
+    frames: 0,
+    isPaused: false
 };
+let animationId;
+
+// 静音状态读取
+let isMuted = localStorage.getItem('flappyMuted') === 'true';
+[soundJump, soundScore, soundHit].forEach(s => s.muted = isMuted);
 
 // 鸟对象
 const bird = {
@@ -161,33 +181,67 @@ class Pipe {
 const background = {
     // 绘制天空和地面
     draw: function() {
-        // 天空
+        // 天空和地面
         ctx.fillStyle = '#70c5ce';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // 云朵
+
+        // 动态云朵
+        const cloudSpeed = 0.2;
+        const offset = (game.frames * cloudSpeed) % (canvas.width + 150);
+        ctx.save();
+        ctx.translate(-offset, 0);
         ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
         ctx.beginPath();
         ctx.arc(50, 70, 25, 0, Math.PI * 2);
         ctx.arc(80, 60, 30, 0, Math.PI * 2);
         ctx.arc(110, 75, 20, 0, Math.PI * 2);
         ctx.fill();
-        
         ctx.beginPath();
         ctx.arc(250, 40, 25, 0, Math.PI * 2);
         ctx.arc(280, 30, 30, 0, Math.PI * 2);
         ctx.arc(310, 45, 20, 0, Math.PI * 2);
         ctx.fill();
-        
+        ctx.restore();
+
         // 地面
         ctx.fillStyle = '#dea673';
         ctx.fillRect(0, canvas.height - 80, canvas.width, 80);
-        
         // 草地
         ctx.fillStyle = '#5e7e32';
         ctx.fillRect(0, canvas.height - 80, canvas.width, 15);
     }
 };
+
+// 获取控制按钮
+const pauseBtn = document.getElementById('pause-btn');
+const muteBtn = document.getElementById('mute-btn');
+// 初始化控制按钮文本
+muteBtn.textContent = isMuted ? '🔇' : '🔈';
+
+// 暂停/继续
+pauseBtn.addEventListener('click', () => {
+    if (!game.isRunning) return;
+    if (!game.isPaused) {
+        game.isPaused = true;
+        pauseBtn.textContent = '继续';
+        cancelAnimationFrame(animationId);
+        backgroundMusic.pause();
+    } else {
+        game.isPaused = false;
+        pauseBtn.textContent = '暂停';
+        animationId = requestAnimationFrame(gameLoop);
+        backgroundMusic.play();
+    }
+});
+
+// 静音切换
+muteBtn.addEventListener('click', () => {
+    isMuted = !isMuted;
+    [soundJump, soundScore, soundHit].forEach(s => s.muted = isMuted);
+    muteBtn.textContent = isMuted ? '🔇' : '🔈';
+    localStorage.setItem('flappyMuted', isMuted);
+    backgroundMusic.muted = isMuted;
+});
 
 // 开始游戏
 function startGame(selectedSpeed) {
@@ -202,12 +256,14 @@ function startGame(selectedSpeed) {
     scoreDisplay.textContent = '0';
     bird.reset();
     pipes = [];
+    backgroundMusic.play();
     requestAnimationFrame(gameLoop);
 }
 
 // 游戏结束
 function gameOver() {
     game.isRunning = false;
+    backgroundMusic.pause();
     soundHit.play();
     scoreEndDisplay.textContent = game.score;
     // 更新最高分
@@ -256,8 +312,8 @@ function gameLoop() {
     game.frames++;
     
     // 如果游戏正在运行，继续循环
-    if (game.isRunning) {
-        requestAnimationFrame(gameLoop);
+    if (game.isRunning && !game.isPaused) {
+        animationId = requestAnimationFrame(gameLoop);
     }
 }
 
